@@ -1,0 +1,13 @@
+*{
+    border: 0;
+    margin: 0;
+    padding: 0;
+    display: block;
+    text-decoration: none;
+    color: white;
+    background-image: url('/static/imgs/oi.jpg');
+}
+
+:root{
+    --black: #000000;
+}
