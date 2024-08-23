@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block conteudo %}
+    <a href="/carros/add">Adicionar</a>
+    <table>
+        <tr>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Ano</th>
+        </tr>
+        <tr>
+        {% for carros in dados %}
+        <li>
+            {% carros.marca %}
+            {% carros.modelo %}
+            {% carros.ano %}
+        </li>
+        {% endfor %}
+        </tr>
+    </table>
+{% endblock %}
