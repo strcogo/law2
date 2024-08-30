@@ -1,6 +1,12 @@
 {% extends "base.html" %}
 
 {% block conteudo %}
+    {% set mensagens = get_flashed_messages() %}
+    {% if mensagens %}
+        {% for msg in mensagens %}
+            {{ msg }}
+        {% endfor %}
+    {% endif %}
     <a href="/carros/add">Adicionar</a>
     <table>
         <tr>
@@ -8,14 +14,12 @@
             <th>Modelo</th>
             <th>Ano</th>
         </tr>
-        <tr>
         {% for carros in dados %}
-        <li>
-            {% carros.marca %}
-            {% carros.modelo %}
-            {% carros.ano %}
-        </li>
-        {% endfor %}
+        <tr>
+            <td>{{carros.marca}}</td>
+            <td>{{carros.modelo}}</td>
+            <td>{{carros.ano}}</td>
         </tr>
+        {% endfor %}
     </table>
 {% endblock %}

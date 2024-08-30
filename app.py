@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash
+from flask import *
 from database import db
 from flask_migrate import Migrate
 from models import Carros
@@ -18,32 +18,29 @@ migrate = Migrate(app, db)
 def index():
     return render_template("index.html")
 
-@app.route("/aula")
-@app.route("/aula/<name>")
-@app.route("/aula/<name>/<curso>")
-@app.route('/aula/<name>/<curso>/<int:ano>')
-def aula(name = "Carlos", curso = "carli", ano = 2):
-    dados = {'name':name, 'curso':curso, 'ano':ano}
-    return render_template("aula.html", dados_curso = dados)
-
-@app.route("/form")
-def form():
-    return render_template("form.html")
-
-@app.route("/dados", methods=["POST"])
-def dados():
-    flash("dados enviados!!")
-    dados = request.form
-    return render_template("dados.html", dados=dados)
-
 @app.route("/carros")
 def carros():
-    car = Carros.query.all
+    car = Carros.query.all()
     return render_template("carros.html", dados=car)
 
 @app.route("/carros/add")
 def carros_add():
-    pass
+    return render_template("carros_add.html")
+
+@app.route("/carros/save", methods=["POST"])
+def save():
+    marca = request.form.get("marca")
+    modelo = request.form.get("modelo")
+    ano = request.form.get("ano")
+    if marca and modelo and ano:
+        carros = Carros(marca, modelo, ano)
+        db.session.add(carros)
+        db.session.commit()
+        flash("Carro cadastrado")
+        return redirect('/carros')
+    else:
+        flash("Preencha todos os campos")
+        return redirect('/carros/add')
 
 if __name__ == '__main__':
     app.run()
