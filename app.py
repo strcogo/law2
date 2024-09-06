@@ -41,6 +41,46 @@ def save():
     else:
         flash("Preencha todos os campos")
         return redirect('/carros/add')
+    
+@app.route("/carros/remove/<int:id>")
+def carros_remove(id):
+    carros = Carros.query.get(id)
+    if carros:
+        db.session.delete(carros)
+        db.session.commit()
+        flash("Carro removido!!")
+        return redirect("/carros")
+    else:
+        flash("Caminho Incorreto!!")
+        return redirect("/carros")
+
+@app.route("/carros/edit/<int:id>")
+def carros_edit(id):
+    try:
+        carros = Carros.query.get(id)
+        return render_template("carros_edit.html", dados=carros)
+    except:
+        flash("Carro Inválido")
+        return redirect("/carros")
+    
+@app.route("/carros/editsave", methods=["POST"])
+def carros_edit_save():
+    id = request.form.get("id")
+    marca = request.form.get("marca")
+    modelo = request.form.get("modelo")
+    ano = request.form.get("ano")
+
+    if id and marca and modelo and ano:
+        carro = Carros.query.get(id)
+        carro.marca = marca
+        carro.modelo = modelo
+        carro.ano = ano
+        db.session.commit()
+        flash("Dados alterados com sucesso!!")
+        return redirect("/carros")
+    else:
+        flash("Preencha todas as informações")
+        return redirect("/carros/edit")
 
 if __name__ == '__main__':
     app.run()

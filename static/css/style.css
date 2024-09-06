@@ -1,24 +1,60 @@
 *{
     box-sizing: border-box;
+    margin: 0;
     color: white;
-    background-color: darkblue;
+    background-color: #cccccc;
 }
 
 :root{
     --black: #000000;
 }
 
-a{
+a, .message{
     font-size: 40px;
 }
 
-.dados{
+.dados{ 
     display: block;
-    width: fit-content;
-    
+    width: fit-content;   
+}
+
+nav{
+    background-color: #696969;
+}
+
+nav a{
+    text-decoration: none;
+    background-color: #696969;
+    padding-right: 20px;
+}
+
+section{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 
 table tr, td, th{
     border: 1px solid black;
+    color: black;
     border-collapse: collapse;
+}
+
+table td a{
+    color: black;
+    font-size: medium;
+}
+
+.entrada{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    color: black;
+}
+
+.entrada form{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    
 }
