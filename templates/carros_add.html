@@ -9,13 +9,14 @@
     {% endif %}
     <div class="entrada">
         <form action="/carros/save" method="post">
-            <label for="marca">Marca:</label>
+            <label class="name" for="marca">Marca:</label>
             <input type="text" name="marca" id="marca">
-            <label for="modelo">Modelo:</label>
+            <label class="name" for="modelo">Modelo:</label>
             <input type="text" name="modelo" id="modelo">
-            <label for="ano">Ano:</label>
+            <label class="name" for="ano">Ano:</label>
             <input type="number" name="ano" id="ano">
-            <button type="submit">Salvar</button>
+            </br>
+            <button class="name" type="submit">Salvar</button>
         </form>
     </div>
 {% endblock %}
